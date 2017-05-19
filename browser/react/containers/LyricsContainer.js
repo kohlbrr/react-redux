@@ -3,7 +3,7 @@
 import React from 'react';
 import store from '../store';
 import Lyrics from '../components/Lyrics';
-import { setLyrics } from '../action-creators/lyrics'; // This was a gotcha ({})
+import { fetchLyrics } from '../action-creators/lyrics'; // This was a gotcha ({})
 import axios from 'axios';
 
 class LyricsContainer extends React.Component {
@@ -42,12 +42,17 @@ class LyricsContainer extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    if(this.state.artistQuery && this.state.songQuery) {
+      store.dispatch(fetchLyrics(this.state.artistQuery, this.state.songQuery));
+    }
+    /*
     axios.get(`/api/lyrics/${this.state.artistQuery}/${this.state.songQuery}`)
     .then(res => res.data)
     .then((data) => {
       store.dispatch(setLyrics(data.lyric));
     })
     .catch(console.error);
+    */
   }
 
   render () {
