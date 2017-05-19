@@ -7,4 +7,4 @@ export const setLyrics = function(text) {
     type: SET_LYRICS,
     lyric: text
   });
-}
+};
